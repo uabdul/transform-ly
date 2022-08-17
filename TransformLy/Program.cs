@@ -13,6 +13,7 @@ namespace TransformLyApp
         {
             var listOfFlights = LoadFlightData();
             int userInput = 0;
+            int menuExitInput = 3;
 
             //App menu
             do
@@ -34,7 +35,7 @@ namespace TransformLyApp
                         HandleInvalidInput();
                         break;
                 }
-            } while (userInput != 3);
+            } while (userInput != menuExitInput);
         }
 
         public static List<Flight> LoadFlightData()
@@ -104,16 +105,22 @@ namespace TransformLyApp
 
         public static List<Order> AssignOrdersToFlights(List<Flight> listOfFlights, List<Order> listOfOrders)
         {
+
+            var flightDictionaryByArrivalCity = listOfFlights.GroupBy(flight => flight.ArrivalCity).ToDictionary(keySelector: group => group.Key, elementSelector: group => group.ToList());
+
             foreach (var order in listOfOrders)
             {
-                foreach(var flight in listOfFlights)
+
+                if (flightDictionaryByArrivalCity.ContainsKey(order.Destination))
                 {
-                    Console.WriteLine("order in foreach" + order.OrderNumber);
-                    if (order.Destination == flight.ArrivalCity && flight.FlightCapacity > 0)
+                    foreach (var flight in flightDictionaryByArrivalCity[order.Destination])
                     {
-                        order.AssignFlight(flight);
-                        flight.UpdateFlightCapacity();
-                        break;
+                        if (order.Destination == flight.ArrivalCity && flight.FlightCapacity > 0)
+                        {
+                            order.AssignFlight(flight);
+                            flight.UpdateFlightCapacity();
+                            break;
+                        }
                     }
                 }
             }
