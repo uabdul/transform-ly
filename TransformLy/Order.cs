@@ -19,11 +19,11 @@ namespace TransformLy
         {
             if (this.Flight == null)
             {
-                Console.WriteLine("Order Number: " + this.OrderNumber + " Destination: " + this.Destination + " Assignment: not assigned");
+                Console.WriteLine("Order: " + this.OrderNumber + " Flight Number: not scheduled");
             }
             else
             {
-                Console.WriteLine("Order Number: " + this.OrderNumber + " Destination: " + this.Destination + " Assignment: " + this.Flight.FlightNumber);
+                Console.WriteLine("Order: " + this.OrderNumber + " Flight Number: " + this.Flight.FlightNumber + " Departure: " + this.Flight.DepartureCity + " Arrival: " + this.Flight.ArrivalCity + " Day: " + this.Flight.DayOfWeek);
             }
         }
 
