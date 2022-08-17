@@ -1,5 +1,8 @@
 ﻿
+using System.Text.Json;
 using Microsoft.VisualBasic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using TransformLy;
 
 namespace TransformLyApp
@@ -11,6 +14,7 @@ namespace TransformLyApp
             var listOfFlights = LoadFlightData();
             int userInput = 0;
 
+            //App menu
             do
             {
                 userInput = DisplayMenu();
@@ -20,7 +24,9 @@ namespace TransformLyApp
                         PrintFlightData(listOfFlights);
                         break;
                     case 2:
-                        //TO DO
+                        var listOfOrders = LoadOrderData("Orders.json");
+                        var listOfOrderAssignments = AssignOrdersToFlights(listOfFlights, listOfOrders);
+                        PrintOrderData(listOfOrderAssignments);
                         break;
                     case 3:
                         break;
@@ -82,6 +88,45 @@ namespace TransformLyApp
             }
         }
 
+        public static List<Order> LoadOrderData(string filepath)
+        {
+
+            string OrderJSONData = File.ReadAllText(filepath);
+            var responseObject = JsonConvert.DeserializeObject(OrderJSONData) as JObject;
+            var list = responseObject.Properties();
+            var orders = new List<Order>();
+            foreach (var item in list)
+            {
+                orders.Add(new Order(item.Name, responseObject[item.Name]["destination"].ToString()));
+            }
+            return orders;
+        }
+
+        public static List<Order> AssignOrdersToFlights(List<Flight> listOfFlights, List<Order> listOfOrders)
+        {
+            foreach (var order in listOfOrders)
+            {
+                foreach(var flight in listOfFlights)
+                {
+                    Console.WriteLine("order in foreach" + order.OrderNumber);
+                    if (order.Destination == flight.ArrivalCity && flight.FlightCapacity > 0)
+                    {
+                        order.AssignFlight(flight);
+                        flight.UpdateFlightCapacity();
+                        break;
+                    }
+                }
+            }
+            return listOfOrders;
+        }
+
+        public static void PrintOrderData(List<Order> orders)
+        {
+            foreach (Order order in orders)
+            {
+                order.PrintToConsole();
+            }
+        }
 
     }
 
