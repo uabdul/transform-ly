@@ -1,0 +1,15 @@
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/bin/Debug/net6.0/TransformLy
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/bin/Debug/net6.0/TransformLy.deps.json
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/bin/Debug/net6.0/TransformLy.runtimeconfig.json
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/bin/Debug/net6.0/TransformLy.dll
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/bin/Debug/net6.0/TransformLy.pdb
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/obj/Debug/net6.0/TransformLy.csproj.AssemblyReference.cache
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/obj/Debug/net6.0/TransformLy.GeneratedMSBuildEditorConfig.editorconfig
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/obj/Debug/net6.0/TransformLy.AssemblyInfoInputs.cache
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/obj/Debug/net6.0/TransformLy.AssemblyInfo.cs
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/obj/Debug/net6.0/TransformLy.csproj.CoreCompileInputs.cache
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/obj/Debug/net6.0/TransformLy.dll
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/obj/Debug/net6.0/refint/TransformLy.dll
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/obj/Debug/net6.0/TransformLy.pdb
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/obj/Debug/net6.0/TransformLy.genruntimeconfig.cache
+/Users/umairabdulqadir/Projects/TransformLy/TransformLy/obj/Debug/net6.0/ref/TransformLy.dll
