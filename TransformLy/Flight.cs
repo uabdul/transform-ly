@@ -10,28 +10,25 @@ namespace TransformLy
         public string DepartureCity { get; }
         public string ArrivalCity { get; }
         public int DayOfWeek { get; }
-        public int FlightCapacity { get; }
+        public int FlightCapacity { get; set; }
 
         public Flight(int flightnumber, string departure, string arrival, int dayofweek)
         {
             FlightNumber = flightnumber;
             DepartureCity = departure;
             ArrivalCity = arrival;
-            DayOfWeek = dayofweek; 
+            DayOfWeek = dayofweek;
             FlightCapacity = 20;
         }
 
-
-        //public override string ToString()
-        //{
-        //    return base.ToString();
-        //}
-
-
-        //Methods
         public void PrintToConsole()
         {
             Console.WriteLine("Flight: " + this.FlightNumber + " Departure: " + this.DepartureCity + " Arrival: " + this.ArrivalCity + " Day: " + this.DayOfWeek);
+        }
+
+        public void UpdateFlightCapacity()
+        {
+            FlightCapacity = FlightCapacity - 1;
         }
     }
 }
