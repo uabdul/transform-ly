@@ -9,42 +9,26 @@ namespace TransformLyApp
         static void Main(string[] args)
         {
             var listOfFlights = LoadFlightData();
-            PrintFlightData(listOfFlights);
-            //var flightDictionaryByArrivalCity = listOfFlights.ToDictionary(keySelector: flight => flight.ArrivalCity, elementSelector: flight => flight);
-            var flightDictionaryByArrivalCity = listOfFlights.GroupBy(flight => flight.ArrivalCity).ToDictionary(keySelector: group => group.Key, elementSelector: group => group.ToList());
+            int userInput = 0;
 
-            foreach (var flightGroup in flightDictionaryByArrivalCity)
+            do
             {
-                Console.WriteLine($"{flightGroup.Key}={string.Join(", ", flightGroup.Value.Select(s => s.FlightNumber))}");
-            }
-
-            //Console.WriteLine(flightDictionaryByArrivalCity);
-            //foreach (Flight flight in listOfFlights)
-            //{
-            //    flight.PrintToConsole();
-            //}
-
-            //TO DO
-            //2. hash map or dictionary of string (destination) to list of flights; for each flight loaded, we want to take the destiniation and add our flight to the list in that dictionary
-
-
-            //3. load JSON file and transform if necessary
-            //4. take output of 2 and compare with output of 3 - output may be a list of strings
-            //5. for each string, console.writeline()
-            //List<Flight> listOfFlights = new List<Flight>()
-            //{
-            //    new Flight() { FlightNumber = 1, DepartureCity = "YUL", ArrivalCity = "YYZ", DayOfWeek = 1 },
-            //    new Flight() { FlightNumber = 2, DepartureCity = "YUL", ArrivalCity = "YYC", DayOfWeek = 1 },
-            //    new Flight() { FlightNumber = 3, DepartureCity = "YUL", ArrivalCity = "YVR", DayOfWeek = 1 },
-            //    new Flight() { FlightNumber = 4, DepartureCity = "YUL", ArrivalCity = "YYZ", DayOfWeek = 2 },
-            //    new Flight() { FlightNumber = 5, DepartureCity = "YUL", ArrivalCity = "YYC", DayOfWeek = 2 },
-            //    new Flight() { FlightNumber = 6, DepartureCity = "YUL", ArrivalCity = "YVR", DayOfWeek = 2 },
-
-
-            //};
-            //foreach (Flight flight in listOfFlights)
-            //    flight.PrintToConsole();
-
+                userInput = DisplayMenu();
+                switch (userInput)
+                {
+                    case 1:
+                        PrintFlightData(listOfFlights);
+                        break;
+                    case 2:
+                        //TO DO
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        HandleInvalidInput();
+                        break;
+                }
+            } while (userInput != 3);
         }
 
         public static List<Flight> LoadFlightData()
@@ -52,15 +36,42 @@ namespace TransformLyApp
             //Currently, flight data is hard coded
             var flightData = new List<Flight>()
             { 
-                new Flight() { FlightNumber = 1, DepartureCity = "YUL", ArrivalCity = "YYZ", DayOfWeek = 1 },
-                new Flight() { FlightNumber = 2, DepartureCity = "YUL", ArrivalCity = "YYC", DayOfWeek = 1 },
-                new Flight() { FlightNumber = 3, DepartureCity = "YUL", ArrivalCity = "YVR", DayOfWeek = 1 },
-                new Flight() { FlightNumber = 4, DepartureCity = "YUL", ArrivalCity = "YYZ", DayOfWeek = 2 },
-                new Flight() { FlightNumber = 5, DepartureCity = "YUL", ArrivalCity = "YYC", DayOfWeek = 2 },
-                new Flight() { FlightNumber = 6, DepartureCity = "YUL", ArrivalCity = "YVR", DayOfWeek = 2 },
+                new Flight(1, "YUL", "YYZ", 1),
+                new Flight(2, "YUL", "YYC", 1),
+                new Flight(3, "YUL", "YVR", 1),
+                new Flight(4, "YUL", "YYZ", 2),
+                new Flight(5, "YUL", "YYC", 2),
+                new Flight(6, "YUL", "YVR", 2)
             };
 
             return flightData;
+        }
+
+        public static int DisplayMenu()
+        {
+            Console.WriteLine("Please select one of the following options:");
+            Console.WriteLine("1 - Print flight data");
+            Console.WriteLine("2 - Assign orders");
+            Console.WriteLine("3 - Exit the Transform.Ly app");
+            var input = Console.ReadLine();
+            return CheckUserInput(input);
+        }
+
+        public static int CheckUserInput(string input)
+        {
+            if (int.TryParse(input, out int validIntegerInput))
+            {
+                return validIntegerInput;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public static void HandleInvalidInput()
+        {
+            Console.WriteLine("Please provide a valid input from the menu options.");
         }
 
         public static void PrintFlightData(List<Flight> flights)
